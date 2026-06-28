@@ -1,0 +1,61 @@
+<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+  <div class="mb-4 p-8">
+    <p-card [style]="{ width: '360px', overflow: 'hidden' }">
+      <ng-template #title> Login </ng-template>
+
+      <div class="flex flex-column gap-3">
+        <label for="email">Email</label>
+        <input
+          pInputText
+          class="w-full"
+          id="email"
+          type="text"
+          placeholder="Type your email"
+          formControlName="email"
+        />
+        @if (loginForm.get('email'); as emailCtrl) {
+          @if (emailCtrl.invalid && emailCtrl.touched) {
+            @for (validation of messages.emailAddress; track validation.type) {
+              @if (emailCtrl.hasError(validation.type)) {
+                <p-message severity="error" variant="simple">{{ validation.message }}</p-message>
+              }
+            }
+          }
+        }
+
+        <label for="password">Password</label>
+
+        <input
+          pInputText
+          class="w-full"
+          id="password"
+          type="password"
+          placeholder="Type your password"
+          formControlName="password"
+        />
+        @if (loginForm.get('password'); as passwordCtrl) {
+          @if (passwordCtrl.invalid && passwordCtrl.touched) {
+            @for (validation of messages.password; track validation.type) {
+              @if (passwordCtrl.hasError(validation.type)) {
+                <p-message severity="error" variant="simple">{{ validation.message }}</p-message>
+              }
+            }
+          }
+        }
+
+        <p-button
+          label="SIGN IN"
+          type="submit"
+          styleClass="w-full"
+          [loading]="loading()"
+          [disabled]="loginForm.invalid || loading()"
+        >
+        </p-button>
+        <div class="mt-2">
+          Not a member?
+          <a routerLink="/register" class="no-underline hover:underline">Register</a>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</form>

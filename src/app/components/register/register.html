@@ -1,0 +1,105 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="mb-4 p-8 flex items-center justify-center">
+    <p-card [style]="{ width: '360px', overflow: 'hidden' }">
+      <ng-template #title> Register </ng-template>
+
+      <div class="flex flex-column gap-3">
+        <label for="fullName">Full Name</label>
+        <input
+          pInputText
+          class="w-full"
+          id="fullName"
+          type="text"
+          placeholder="Type your Full Name"
+          formControlName="fullName"
+        />
+        @if (registerForm.get('fullName'); as fullNameCtrl) {
+          @if (fullNameCtrl.invalid && fullNameCtrl.touched) {
+            @for (validation of messages.fullName; track validation.type) {
+              @if (fullNameCtrl.hasError(validation.type)) {
+                <p-message severity="error" variant="simple">{{ validation.message }}</p-message>
+              }
+            }
+          }
+        }
+
+        <label for="email">Email</label>
+        <input
+          pInputText
+          class="w-full"
+          id="email"
+          type="text"
+          placeholder="Type your email"
+          formControlName="email"
+        />
+        @if (registerForm.get('email'); as emailCtrl) {
+          @if (emailCtrl.invalid && emailCtrl.touched) {
+            @for (validation of messages.emailAddress; track validation.type) {
+              @if (emailCtrl.hasError(validation.type)) {
+                <p-message severity="error" variant="simple">{{ validation.message }}</p-message>
+              }
+            }
+          }
+        }
+
+        <label for="password">Password</label>
+        <input
+          pInputText
+          class="w-full"
+          id="password"
+          type="password"
+          placeholder="Type your password"
+          formControlName="password"
+        />
+        @if (registerForm.get('password'); as passwordCtrl) {
+          @if (passwordCtrl.invalid && passwordCtrl.touched) {
+            @for (validation of messages.password; track validation.type) {
+              @if (passwordCtrl.hasError(validation.type)) {
+                <p-message severity="error" variant="simple">{{ validation.message }}</p-message>
+              }
+            }
+          }
+        }
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          pInputText
+          class="w-full"
+          id="confirmPassword"
+          type="password"
+          placeholder="Re-type your password"
+          formControlName="confirmPassword"
+        />
+        @if (registerForm.get('confirmPassword'); as confirmCtrl) {
+          @if (confirmCtrl.invalid && confirmCtrl.touched) {
+            @for (validation of messages.confirmPassword; track validation.type) {
+              @if (confirmCtrl.hasError(validation.type)) {
+                <p-message severity="error" variant="simple">{{ validation.message }}</p-message>
+              }
+            }
+          }
+        }
+        @if (
+          registerForm.hasError('passwordMismatch') &&
+          registerForm.get('confirmPassword')?.valid &&
+          registerForm.get('password')?.valid
+        ) {
+          <p-message severity="error" variant="simple">Passwords should match</p-message>
+        }
+
+        <p-button
+          label="Register"
+          type="submit"
+          styleClass="w-full"
+          [loading]="loading() || loading()"
+          [disabled]="registerForm.invalid"
+        >
+        </p-button>
+        <div class="mt-2">
+          Already a member?
+          <a routerLink="/login" class="no-underline hover:underline">Login</a>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</form>
