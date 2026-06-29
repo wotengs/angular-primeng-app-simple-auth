@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "fullName": "ojnijn jjj",
+      "email": "omniqatest1@gmail.com",
+      "password": "iiiiiiii",
+      "id": "jYQoXNFMmOo"
+    },
+    {
+      "fullName": "Martin Mwangi",
+      "email": "martin.wangombe@strathmore.edu",
+      "password": "Martin2001",
+      "id": "xd0RaYM5GEE"
+    },
+    {
+      "fullName": "Mwangi Martin",
+      "email": "omniqatest1@gmail.com",
+      "password": "11111111",
+      "id": "bnPe8OYaf0U"
+    },
+    {
+      "fullName": "Mwangi Martin",
+      "email": "omniqatest1@gmail.com",
+      "password": "11111111",
+      "id": "HYrqdw7bpJQ"
+    },
+    {
+      "fullName": "Mwangi Martin",
+      "email": "2001mwangi@gmail.com",
+      "password": "99999999",
+      "id": "H6-Dlzal5hw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

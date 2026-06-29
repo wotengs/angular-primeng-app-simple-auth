@@ -20,7 +20,12 @@
     "@angular/platform-server": "^21.2.0",
     "@angular/router": "^21.2.0",
     "@angular/ssr": "^21.2.7",
+    "@primeuix/themes": "^2.0.3",
     "express": "^5.1.0",
+    "json-server": "^1.0.0-beta.15",
+    "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.1.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -32,6 +37,7 @@
     "@types/node": "^20.17.19",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
+    "sass": "^1.101.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }
