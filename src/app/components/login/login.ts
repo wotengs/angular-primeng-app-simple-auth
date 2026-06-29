@@ -3,7 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
+
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { APPLICATION_VALIDATION_MESSAGES } from '../../shared/feature.constants';
 import { MessageService } from 'primeng/api';
@@ -20,6 +22,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ReactiveFormsModule,
     MessageModule,
     RouterLink,
+
+    RippleModule,
   ],
   templateUrl: './login.html',
 })
@@ -45,6 +49,15 @@ export class Login {
   });
 
   loginUser() {
+    this._messageService.add({
+      severity: 'secondary',
+      summary: 'Please wait...',
+      detail: 'Your request is being processed. This may take a moment.',
+      icon: 'pi pi-spinner pi-spin',
+      key: 'promise',
+      sticky: true,
+    });
+
     const { email, password } = { ...this.loginForm.value };
     this.loading.set(true);
     this._authService
@@ -57,26 +70,41 @@ export class Login {
             this._router.navigate(['home']);
 
             sessionStorage.setItem('email', email as string);
-            this._messageService.add({
-              severity: 'success',
-              summary: 'Successfull Login',
-              detail: 'Welcome Back ' + response[0].fullName,
-            });
+            this._messageService.clear('promise');
+            setTimeout(() => {
+              this._messageService.add({
+                severity: 'success',
+                summary: 'Successfull Login',
+                detail: 'Welcome Back ' + response[0].fullName,
+                key: 'promise',
+                life: 3000,
+              });
+            }, 300);
           } else {
-            this._messageService.add({
-              severity: 'error',
-              summary: 'Failed Login',
-              detail: 'Email or Password is wrong',
-            });
+            this._messageService.clear('promise');
+            setTimeout(() => {
+              this._messageService.add({
+                severity: 'error',
+                summary: 'Failed Login',
+                detail: 'Email or Password is wrong',
+                key: 'promise',
+                life: 3000,
+              });
+            }, 300);
           }
         },
         error: (error) => {
-          this.loading.set(false);
-          this._messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: error.error.message || "We couldn't log you in, try again",
-          });
+          this._messageService.clear('promise');
+          setTimeout(() => {
+            this.loading.set(false);
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: "We couldn't log you in, try again",
+              key: 'promise',
+              life: 3000,
+            });
+          }, 300);
         },
       });
   }

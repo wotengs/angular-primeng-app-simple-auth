@@ -2,6 +2,7 @@ import { Component, inject, DestroyRef, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { passwordMatchValidator, fullNameValidator } from '../../shared/form.helper';
@@ -22,6 +23,7 @@ import { Router, RouterLink } from '@angular/router';
     ReactiveFormsModule,
     MessageModule,
     RouterLink,
+    RippleModule,
   ],
   templateUrl: './register.html',
 })
@@ -58,6 +60,15 @@ export class Register {
   );
 
   onSubmit(): void {
+    this._messageService.add({
+      severity: 'secondary',
+      summary: 'Please wait...',
+      detail: 'Your request is being processed. This may take a moment.',
+      icon: 'pi pi-spinner pi-spin',
+      key: 'promise',
+      sticky: true,
+    });
+
     const postData = { ...this.registerForm.value };
     delete postData.confirmPassword;
     this.loading.set(true);
@@ -67,22 +78,33 @@ export class Register {
       .subscribe({
         next: () => {
           this.loading.set(false);
-          this._messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'User registered successfully',
-          });
+          this._messageService.clear('promise');
+          setTimeout(() => {
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Success!',
+              detail: 'User registered successfully',
+              key: 'promise',
+              life: 3000,
+            });
+          }, 300);
+
           setTimeout(() => {
             this._router.navigate(['login']);
           }, 2000);
         },
         error: (error) => {
           this.loading.set(false);
-          this._messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: error.error.message || 'An error occurred during registration',
-          });
+          this._messageService.clear('promise');
+          setTimeout(() => {
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Error!',
+              detail: 'An error occurred during registration, try again',
+              key: 'promise',
+              life: 3000,
+            });
+          }, 300);
         },
       });
   }

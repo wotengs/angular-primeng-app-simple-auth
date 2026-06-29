@@ -1,34 +1,22 @@
 {
   "users": [
     {
-      "fullName": "ojnijn jjj",
-      "email": "omniqatest1@gmail.com",
-      "password": "iiiiiiii",
-      "id": "jYQoXNFMmOo"
+      "fullName": "Liberty Odom",
+      "email": "jode@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "i5djg2NVbtU"
     },
     {
-      "fullName": "Martin Mwangi",
-      "email": "martin.wangombe@strathmore.edu",
-      "password": "Martin2001",
-      "id": "xd0RaYM5GEE"
+      "fullName": "Kameko Garrison",
+      "email": "menapoxivy@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": "I-VPpbORYRk"
     },
     {
-      "fullName": "Mwangi Martin",
-      "email": "omniqatest1@gmail.com",
-      "password": "11111111",
-      "id": "bnPe8OYaf0U"
-    },
-    {
-      "fullName": "Mwangi Martin",
-      "email": "omniqatest1@gmail.com",
-      "password": "11111111",
-      "id": "HYrqdw7bpJQ"
-    },
-    {
-      "fullName": "Mwangi Martin",
+      "fullName": "martin mwangi",
       "email": "2001mwangi@gmail.com",
-      "password": "99999999",
-      "id": "H6-Dlzal5hw"
+      "password": "11111111",
+      "id": "VPey8BEkKi4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
